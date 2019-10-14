@@ -1,0 +1,18 @@
+-- create database Test
+GO
+use Test
+GO
+--Create table tbl_TodoItems(
+	ID int IDENTITY(1,1) PRIMARY KEY,
+	StartDate date null,
+	EndDate date null,
+	Summary nvarchar(max),
+	Title nvarchar(max)
+)
+GO
+--insert into tbl_TodoItems (StartDate, EndDate, Summary, Title)
+values (null, null, 'This summary is coming from database', 'this title is coming from database' )
+
+
+
+select * from tbl_TodoItems
