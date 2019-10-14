@@ -18,9 +18,17 @@ namespace TodoApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment environment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional:true, reloadOnChange:true);
+                
+                if(environment.IsDevelopment()){
+                    builder.AddJsonFile("appsettings.Development.json", optional:true, reloadOnChange:true);
+                }
+            
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
