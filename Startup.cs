@@ -24,6 +24,7 @@ namespace TodoApi
                 .SetBasePath(environment.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional:true, reloadOnChange:true);
                 
+                // for development environment use different settings 
                 if(environment.IsDevelopment()){
                     builder.AddJsonFile("appsettings.Development.json", optional:true, reloadOnChange:true);
                 }
