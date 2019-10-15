@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using TodoApi.Controllers;
 using TodoApi.Models;
 using Microsoft.OpenApi.Models;
+using TodoApi.Repository;
 
 namespace TodoApi
 {
@@ -39,6 +40,7 @@ namespace TodoApi
         {
             services.AddControllers();
             services.AddSingleton<IDailyTasksRepository, DailyTasksRepositoryMock>();
+            services.AddTransient<IEventRepository, EventRepository>();
             services.AddHealthChecks().AddCheck<ApiHealthCheck>("api");
 
             // Register the swagger generator
