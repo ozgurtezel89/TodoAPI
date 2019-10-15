@@ -26,7 +26,7 @@ namespace TodoApi
                 
                 // for development environment use different settings 
                 if(environment.IsDevelopment()){
-                    builder.AddJsonFile("appsettings.Development.json", optional:true, reloadOnChange:true);
+                    builder.AddJsonFile("appsettings.development.json", optional:true, reloadOnChange:true);
                 }
             
             Configuration = builder.Build();
