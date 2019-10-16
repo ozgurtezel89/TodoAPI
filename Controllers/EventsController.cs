@@ -3,6 +3,7 @@ using TodoApi.Repository;
 using System.Linq;
 using TodoApi.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace TodoApi.Controllers
 {
@@ -31,7 +32,7 @@ namespace TodoApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetEvents()
         {
-            IEnumerable<Event> events = this.EventRepository.GetAllEvents();
+            IEnumerable<EventEntry> events = this.EventRepository.GetAllEvents();
 
             if(!events.Any() || events == null )
             {
@@ -39,6 +40,21 @@ namespace TodoApi.Controllers
             }
 
             return Ok(events);
+        }
+
+        [HttpPost("/AddEvent")]
+        [ProducesResponseType(202)]
+        [ProducesResponseType(400)]
+        public IActionResult InsertNewEvent(EventEntry myEvent)
+        {
+            if(ModelState.IsValid)
+            {
+                if (EventRepository.AddEvent(myEvent) == 1)
+                {
+                    return this.Accepted();
+                }
+            }
+            return BadRequest();
         }
     }
 }

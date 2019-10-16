@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TodoApi.Models
 {
-    public class Event
+    public class EventEntry
     {
         [Key]
         public int Id  { get; set; }

@@ -3,6 +3,7 @@ using TodoApi.Models;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 
@@ -10,7 +11,9 @@ namespace TodoApi.Repository
 {
     public interface IEventRepository
     {
-        IEnumerable<Event> GetAllEvents();
+        IEnumerable<EventEntry> GetAllEvents();
+        
+        int AddEvent(EventEntry myEvent);
     }
 
     public class EventRepository : IEventRepository
@@ -35,11 +38,24 @@ namespace TodoApi.Repository
             }
         }
 
-        public IEnumerable<Event> GetAllEvents()
+        public IEnumerable<EventEntry> GetAllEvents()
         {
             using(var db = Connection)
             {
-                return db.Query<Event>("select * from [EVENT]").ToList();
+                return db.Query<EventEntry>("select * from [EVENT]").ToList();
+            }
+        }
+
+        public int AddEvent(EventEntry myEvent)
+        {
+            if(myEvent == null)
+            {
+                throw new ArgumentNullException(nameof(myEvent));
+            }
+
+            using(var db = Connection)
+            {
+                return db.Execute("insert into [Event] ( EventLocationId, EventName, EventDate, DateCreated) values (@eventLocationId, @eventName, @eventDate, @dateCreated)", new { eventLocationId = myEvent.EventLocationId, eventName = myEvent.EventName, eventDate = myEvent.EventDate, dateCreated = myEvent.DateCreated });
             }
         }
     }
