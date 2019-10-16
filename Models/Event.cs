@@ -6,11 +6,10 @@ namespace TodoApi.Models
     public class Event
     {
         [Key]
-        
-        int Id  { get; set; }
-        int EventLocationId  { get; set; }
-        string EventName { get; set; }
-        DateTime EventDate { get; set; }
-        DateTime DateCreated { get; set; }
+        public int Id  { get; set; }
+        public int EventLocationId  { get; set; }
+        public string EventName { get; set; }
+        public DateTime EventDate { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }
