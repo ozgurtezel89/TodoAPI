@@ -32,7 +32,7 @@ namespace TodoApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetEvents()
         {
-            IEnumerable<EventEntry> events = this.EventRepository.GetAllEvents();
+            IEnumerable<Event> events = this.EventRepository.GetAllEvents();
 
             if(!events.Any() || events == null )
             {
@@ -45,7 +45,7 @@ namespace TodoApi.Controllers
         [HttpPost("/AddEvent")]
         [ProducesResponseType(202)]
         [ProducesResponseType(400)]
-        public IActionResult InsertNewEvent(EventEntry myEvent)
+        public IActionResult InsertNewEvent(Event myEvent)
         {
             if(ModelState.IsValid)
             {

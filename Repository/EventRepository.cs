@@ -11,9 +11,9 @@ namespace TodoApi.Repository
 {
     public interface IEventRepository
     {
-        IEnumerable<EventEntry> GetAllEvents();
+        IEnumerable<Event> GetAllEvents();
         
-        int AddEvent(EventEntry myEvent);
+        int AddEvent(Event myEvent);
     }
 
     public class EventRepository : IEventRepository
@@ -38,13 +38,13 @@ namespace TodoApi.Repository
             }
         }
 
-        public IEnumerable<EventEntry> GetAllEvents()
+        public IEnumerable<Event> GetAllEvents()
         {
             using(var db = Connection)
             {
                 string qry ="select * from [Event] e join EventLocation el on e.Id = el.Id";
 
-                var eventEntry = Connection.Query<EventEntry, EventLocation, EventEntry>(
+                var eventEntry = Connection.Query<Event, EventLocation, Event>(
                         sql: qry,
                         (EventEntry, EventLocation) =>
                         {
@@ -57,7 +57,7 @@ namespace TodoApi.Repository
             }
         }
 
-        public int AddEvent(EventEntry myEvent)
+        public int AddEvent(Event myEvent)
         {
             if(myEvent == null)
             {
