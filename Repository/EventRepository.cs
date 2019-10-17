@@ -42,7 +42,18 @@ namespace TodoApi.Repository
         {
             using(var db = Connection)
             {
-                return db.Query<EventEntry>("select * from [EVENT]").ToList();
+                string qry ="select * from [Event] e join EventLocation el on e.Id = el.Id";
+
+                var eventEntry = Connection.Query<EventEntry, EventLocation, EventEntry>(
+                        sql: qry,
+                        (EventEntry, EventLocation) =>
+                        {
+                            EventEntry.EventLocation = EventLocation;
+                            return EventEntry;
+                        },
+                        splitOn: "Id");
+
+                return eventEntry;
             }
         }
 
