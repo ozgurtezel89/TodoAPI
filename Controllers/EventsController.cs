@@ -42,6 +42,13 @@ namespace TodoApi.Controllers
             return Ok(events);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="myEvent"></param>
+        /// <response code="202">Accepted</response>
+        /// <response code="400">BadRequest</response>
+        /// <returns></returns>
         [HttpPost("/AddEvent")]
         [ProducesResponseType(202)]
         [ProducesResponseType(400)]
@@ -56,5 +63,18 @@ namespace TodoApi.Controllers
             }
             return BadRequest();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("/DeleteEvent")]
+        [ProducesResponseType(202)]
+        public IActionResult DeleteEvent(int id) 
+        {
+            return Ok();
+        }
+
     }
 }
