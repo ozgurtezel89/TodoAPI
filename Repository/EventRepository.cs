@@ -4,8 +4,7 @@ using Dapper;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System;
-using Microsoft.Data.SqlClient;
-using System.Linq;
+using System.Data.SqlClient;
 
 namespace TodoApi.Repository
 {
